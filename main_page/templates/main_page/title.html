@@ -1,15 +1,8 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fit&Play</title>
-</head>
-<body>
+{% extends 'main_page/base.html' %}
+
+{% block title %}Fit&Play{% endblock %}
+{% block content %}
     <h1>Fit&Play</h1>
     <a href="/settings" class="btn">Настройки</a>
     <a href="/card_sets" class="btn">Наборы карточек</a>
-</body>
-</html>
+{% endblock %}

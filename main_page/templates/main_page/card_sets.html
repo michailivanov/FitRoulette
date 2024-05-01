@@ -1,13 +1,15 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Наборы карточек</title>
-</head>
-<body>
+{% extends 'main_page/base.html' %}
+
+{% block title %}
+Настройки
+{% endblock %}
+{% block content %}
     <h1>Наборы карточек</h1>
-</body>
-</html>
+    {% for set in sets %}
+        {{ set }}
+        <form action="/game_session/" method="post">
+            {% csrf_token %}
+            <button type="submit"></button>
+        </form>
+    {% endfor %}
+{% endblock %}

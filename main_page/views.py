@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import CardSet, Exercise
 
 
 def title(request):
@@ -11,4 +11,6 @@ def settings(request):
 
 
 def card_sets(request):
-    return render(request, 'main_page/card_sets.html')
+    sets = CardSet.objects.all()
+    return render(request, 'main_page/card_sets.html', {'sets': sets})
+
