@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Настройки
+{% endblock %}
+{% block content %}
+    <h1>Наборы карточек</h1>
+    <form action="/game_session" method="post">
+        {% for set in sets %}
+            <p>{{ set }}
+            {% csrf_token %}
+            <button type="submit"></button></p>
+        {% endfor %}
+    </form>
+{% endblock %}

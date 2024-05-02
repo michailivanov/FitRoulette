@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main_page',
-    'game_session',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
