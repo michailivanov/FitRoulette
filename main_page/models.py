@@ -32,4 +32,4 @@ class GameSession(models.Model):
         return f"http://127.0.0.1:8000/game_session/{self.session_id}"
 
     def __str__(self):
-        return self.session_id
+        return self.pk

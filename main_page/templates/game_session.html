@@ -3,4 +3,5 @@
 {% block title %}Игра скоро начнется!{% endblock %}
 {% block content %}
     <h1>Ссылка на вашу игру: {{ game_session.get_session_url }}</h1>
+    <p>Выбранный набор: {{ game_session.card_set }}</p>
 {% endblock %}
