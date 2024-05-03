@@ -5,11 +5,11 @@
 {% endblock %}
 {% block content %}
     <h1>Наборы карточек</h1>
-    <form action="/game_session" method="post">
+    <form action="{% url 'card_sets' %}" method="post">
+        {% csrf_token %}
         {% for set in sets %}
             <p>{{ set }}
-            {% csrf_token %}
-            <button type="submit"></button></p>
+            <button type="submit" name="set_id" value="{{ set.id }}">Выбрать</button></p>
         {% endfor %}
     </form>
 {% endblock %}
