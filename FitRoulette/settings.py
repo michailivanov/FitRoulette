@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'FitRoulette.wsgi.application'
+ASGI_APPLICATION = 'FitRoulette.asgi.application'
 
 
 # Database

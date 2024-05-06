@@ -19,14 +19,15 @@ class CardSet(models.Model):
 
     """
     name = models.CharField("Название набора", max_length=250)
+    exercises = models.ManyToManyField(Exercise)
 
     def __str__(self):
         return self.name
 
 
 class GameSession(models.Model):
-    card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE, default='')
-    session_id = models.UUIDField(max_length=10, default=uuid.uuid4, editable=False)
+    card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
+    session_id = models.UUIDField(default=uuid.uuid4, editable=False)
 
     def get_session_url(self):
         return f"http://127.0.0.1:8000/game_session/{self.session_id}"
