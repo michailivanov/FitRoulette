@@ -24,7 +24,7 @@ To run this project, you need:
 2. Navigate to the project directory:
 
     ```bash
-    cd ...\FitRoulette
+    cd FitRoulette
     ```
 
 3. Set up a virtual environment (optional but recommended):
