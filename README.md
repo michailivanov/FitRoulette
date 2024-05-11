@@ -44,7 +44,12 @@ To run this project, you need:
 5. Apply database migrations:
 
     ```bash
+    python manage.py makemigrations main_page
     python manage.py migrate
+    ```
+6. Create superuser
+    ```bash
+    python manage.py createsuperuser
     ```
 
 ## Run Server

@@ -11,6 +11,8 @@ __pycache__
 
 # Ignore local configuration
 *.sqlite3
+media/
+main_page/migrations/
 
 # Ignore any compiled Python bytecode
 *.pyc
