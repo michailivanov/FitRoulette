@@ -1,7 +1,37 @@
 {% extends 'base.html' %}
 
 {% block title %}Игра скоро начнется!{% endblock %}
+
 {% block content %}
     <h1>Ссылка на вашу игру: {{ game.get_session_url }}</h1>
     <p>Выбранный набор: {{ game.card_set }}</p>
+    <div id="user-count">Количество игроков: 0</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sessionId = "{{ game.session_id }}";
+            const wsStart = 'ws://';
+            const endpoint = wsStart + window.location.host + '/ws/game_session/' + sessionId + '/';
+            const socket = new WebSocket(endpoint);
+
+            socket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                if (data.user_count !== undefined) {
+                    document.querySelector('#user-count').innerText = `Игроков онлайн: ${data.user_count}`;
+                }
+            }
+
+            socket.onopen = function(e) {
+                console.log("WebSocket connection opened");
+            }
+
+            socket.onerror = function(e) {
+                console.error("WebSocket error observed:", e);
+            }
+
+            socket.onclose = function(e) {
+                console.log("WebSocket connection closed");
+            }
+        });
+    </script>
 {% endblock %}

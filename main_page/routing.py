@@ -1,6 +1,6 @@
-from django.urls import re_path
+from django.urls import path
+from . import consumers
 
 ws_urlpatterns = [
-    # Маршруты для WebSocket
-    # Например: re_path(r'ws/chat/(?P<room_name>\w+)/$', consumers.ChatConsumer.as_asgi()),
+    path("ws/game_session/<uuid:session_id>/", consumers.GameSessionConsumer.as_asgi()),
 ]

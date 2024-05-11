@@ -31,7 +31,7 @@ def game_session(request, session_id):
     return render(request, 'game_session.html', {'game': game})
 
 
-def play_game(request, session_id):
+def start_game(request, session_id):
     game = GameSession.objects.get(session_id=session_id)
     if request.method == 'POST':
         # Spin the fitness roulette wheel
@@ -55,3 +55,5 @@ def play_game(request, session_id):
             }
         )
     return render(request, 'play_game.html', {'game': game})
+
+
