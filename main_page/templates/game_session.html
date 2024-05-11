@@ -6,10 +6,8 @@
     <h1>Ссылка на вашу игру: {{ game.get_session_url }}</h1>
     <p>Выбранный набор: {{ game.card_set }}</p>
     <div id="user-count">Количество игроков: 0</div>
-    <form method="post" action="{% url 'start_game' %}">
-        {% csrf_token %}
-        <button type="submit" name="session_id" value="{{ game.session_id }}">Начать игру</button>
-    </form>
+    <button id="start-game-btn">Начать игру</button>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
