@@ -6,4 +6,5 @@ urlpatterns = [
     path('settings', views.settings, name='settings'),
     path('card_sets', views.card_sets, name='card_sets'),
     path('game_session/<uuid:session_id>/', views.game_session, name='game_session'),
+    path('start_game/<uuid:session_id>/', views.start_game, name='start_game'),
 ]
