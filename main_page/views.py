@@ -1,8 +1,6 @@
 from random import shuffle
 
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse
 
 from .models import CardSet, Exercise, GameSession
 
@@ -19,7 +17,11 @@ def card_sets(request):
     if request.method == 'POST':
         card_set_id = request.POST.get('set_id')
         card_set = CardSet.objects.get(id=card_set_id)
-        game_session = GameSession.objects.create(card_set=card_set)
+        exercises = list(card_set.exercises.all())
+        shuffle(exercises)
+        # Создаем список словарей для JSONField
+        shuffled_exercises = [{'id': ex.id, 'name': ex.name} for ex in exercises]
+        game_session = GameSession.objects.create(card_set=card_set, shuffled_exercises=shuffled_exercises)
         return redirect('game_session', session_id=str(game_session.session_id))
 
     sets = CardSet.objects.all()
@@ -39,11 +41,8 @@ def shuffle_cards(exercises):
 
 def start_game(request, session_id):
     game = GameSession.objects.get(session_id=session_id)
-    shuffled_exercises = shuffle_cards(game.card_set.exercises.all())
-    exercises_info = [{'name': ex.name, 'id': ex.id} for ex in shuffled_exercises]
     return render(request, 'start_game.html', {
         'game': game,
-        'exercises': exercises_info  # Передаем информацию о упражнениях
     })
 
 

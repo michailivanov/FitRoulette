@@ -1,3 +1,5 @@
+from random import shuffle
+
 from django.db import models
 import uuid
 
@@ -25,9 +27,17 @@ class CardSet(models.Model):
         return self.name
 
 
+def shuffle_cards(exercises):
+    exercises_list = list(exercises)
+    shuffle(exercises_list)
+    return exercises_list
+
+
 class GameSession(models.Model):
     card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
     session_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    shuffled_exercises = models.JSONField(default=list)
+    current_exercise_index = models.IntegerField(default=0)
 
     def get_session_url(self):
         return f"http://127.0.0.1:8000/game_session/{self.session_id}"

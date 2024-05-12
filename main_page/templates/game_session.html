@@ -10,6 +10,7 @@
 
 
     <script>
+        console.log({{ game.shuffled_exercises|safe }})
         document.addEventListener('DOMContentLoaded', function () {
             const sessionId = "{{ game.session_id }}";
             const wsStart = 'ws://';
