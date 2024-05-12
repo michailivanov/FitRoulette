@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Fit&Play{% endblock %}
+
+{% block content %}
+<p>Выбранный набор: {{ game.card_set }}</p>
+<button id="spin-wheel-btn">Вращать колесо</button>
+<div id="selected-exercise"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const wsStart = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+        const endpoint = wsStart + window.location.host + '/ws/game_session/{{ game.session_id }}/';
+        const socket = new WebSocket(endpoint);
+
+        document.getElementById('spin-wheel-btn').addEventListener('click', function() {
+            socket.send(JSON.stringify({ action: 'spin_wheel' }));
+        });
+
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            if (data.command === 'display_exercise') {
+                document.getElementById('selected-exercise').innerText = `${data['name']}`;
+            }
+        };
+
+        socket.onopen = function() {
+            console.log("WebSocket connection opened");
+        };
+
+        socket.onerror = function(e) {
+            console.error("WebSocket error observed:", e);
+        };
+
+        socket.onclose = function() {
+            console.log("WebSocket connection closed");
+        };
+    });
+</script>
+{% endblock %}
