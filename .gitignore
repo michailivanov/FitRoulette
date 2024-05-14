@@ -13,6 +13,7 @@ __pycache__
 *.sqlite3
 media/
 main_page/migrations/
+users/migrations/
 
 # Ignore any compiled Python bytecode
 *.pyc
