@@ -3,6 +3,7 @@ from random import shuffle
 from django.db import models
 import uuid
 
+from django.contrib.auth.models import User
 
 class Exercise(models.Model):
     """
@@ -44,3 +45,14 @@ class GameSession(models.Model):
 
     def __str__(self):
         return str(self.session_id)
+
+
+class GameAdmin(models.Model):
+    users = models.ManyToManyField(User)
+
+    card_set = models.ForeignKey(CardSet, on_delete=models.CASCADE)
+    exercises = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    game_session = models.ForeignKey(GameSession, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.users)
