@@ -1,8 +1,11 @@
 from random import shuffle
 
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .models import CardSet, Exercise, GameSession
+from .forms import AddExerciseForm, AddCardSetForm
 
 
 def title(request):
@@ -45,4 +48,38 @@ def start_game(request, session_id):
         'game': game,
     })
 
+@login_required
+def add_exercise(request):
+    if request.method == 'POST':
+        form = AddExerciseForm(request.POST, request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            image = form.cleaned_data.get('image')
+            form.save()
+            messages.success(request, 'Упражнение добавлено!')
+            return redirect('card_sets')
+        else:
+            form = AddExerciseForm(request.POST)
+            messages.success(request, 'Ошибка в добавлении упражнения')
+            return render(request, 'add_exercise.html', {'form': form})
+    else:
+        form = AddExerciseForm()
+        return render(request, 'add_exercise.html', {'form': form})
 
+@login_required
+def add_cardset(request):
+    if request.method == 'POST':
+        form = AddCardSetForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            exercises = form.cleaned_data.get('exercises')
+            form.save()
+            messages.success(request, 'Набор добавлен!')
+            return redirect('card_sets')
+        else:
+            form = AddCardSetForm(request.POST)
+            messages.success(request, 'Ошибка в добавлении набора')
+            return render(request, 'add_cardset.html', {'form': form})
+    else:
+        form = AddCardSetForm()
+        return render(request, 'add_cardset.html', {'form': form})

@@ -151,6 +151,7 @@ APPEND_SLASH = False
 
 LOGIN_REDIRECT_URL = 'main_page'
 LOGOUT_REDIRECT_URL = 'main_page'
+LOGIN_URL = 'users:login'
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
