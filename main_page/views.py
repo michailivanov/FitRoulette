@@ -28,7 +28,7 @@ def card_sets(request):
         return redirect('game_session', session_id=str(game_session.session_id))
 
     sets = CardSet.objects.all()
-    return render(request, 'card_sets.html', {'sets': sets})
+    return sets
 
 
 def game_session(request, session_id):

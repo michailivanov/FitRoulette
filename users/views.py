@@ -6,7 +6,7 @@ from django.urls import reverse, reverse_lazy
 from .forms import LoginUserForm, RegisterUserForm
 from django.views.generic import CreateView
 
-# Create your views here.
+
 class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'users/login.html'

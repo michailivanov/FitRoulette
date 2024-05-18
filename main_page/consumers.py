@@ -5,7 +5,7 @@ from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.core.cache import cache
 
-from .models import GameSession
+from .models import GameSession, Exercise
 
 
 class GameSessionConsumer(AsyncWebsocketConsumer):
@@ -101,6 +101,10 @@ class GameSessionConsumer(AsyncWebsocketConsumer):
         session = GameSession.objects.get(session_id=self.session_id)
         session.current_exercise_index = index
         session.save()
+
+    @database_sync_to_async
+    def get_exercise_image(self):
+        Exercise.objects.get(id=self.id)
 
     async def start_game(self, event):
         # Отправка сообщения о перенаправлении назад в WebSocket

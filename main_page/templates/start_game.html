@@ -8,6 +8,7 @@
 <div id="selected-exercise"></div>
 
 <script>
+    console.log({{ game.shuffled_exercises|safe }})
     document.addEventListener('DOMContentLoaded', function () {
         const wsStart = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
         const endpoint = wsStart + window.location.host + '/ws/game_session/{{ game.session_id }}/';
