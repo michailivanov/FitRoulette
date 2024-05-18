@@ -20,6 +20,7 @@ def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('users:login'))
 
+
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'users/register.html'

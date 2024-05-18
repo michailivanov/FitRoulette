@@ -5,6 +5,7 @@ import uuid
 
 from django.contrib.auth.models import User
 
+
 class Exercise(models.Model):
     """
     Класс "Упражнения

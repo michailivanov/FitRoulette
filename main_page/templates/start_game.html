@@ -20,7 +20,9 @@
         socket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             if (data.command === 'display_exercise') {
-                document.getElementById('selected-exercise').innerText = `${data['name']}`;
+                setTimeout(() => {
+                    document.getElementById('selected-exercise').innerText = `${data['name']}`;
+                }, 3000);  // Задержка 3 секунды перед отображением
             }
         };
 

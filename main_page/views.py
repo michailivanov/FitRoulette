@@ -48,6 +48,7 @@ def start_game(request, session_id):
         'game': game,
     })
 
+
 @login_required
 def add_exercise(request):
     if request.method == 'POST':
@@ -65,6 +66,7 @@ def add_exercise(request):
     else:
         form = AddExerciseForm()
         return render(request, 'add_exercise.html', {'form': form})
+
 
 @login_required
 def add_cardset(request):
