@@ -9,4 +9,5 @@ urlpatterns = [
     path('start_game/<uuid:session_id>/', views.start_game, name='start_game'),
     path('add_exercise', views.add_exercise, name='add_exercise'),
     path('add_cardset', views.add_cardset, name='add_cardset'),
+    path('card_sets_json', views.card_sets_json, name='card_sets_json')
 ]

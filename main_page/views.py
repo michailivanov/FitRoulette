@@ -1,5 +1,6 @@
 from random import shuffle
 
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -28,7 +29,13 @@ def card_sets(request):
         return redirect('game_session', session_id=str(game_session.session_id))
 
     sets = CardSet.objects.all()
-    return sets
+    return render(request, 'card_sets.html', {'sets': sets})
+
+
+def card_sets_json(request):
+    card_sets = CardSet.objects.all().values('id', 'name')
+    data = list(card_sets)
+    return JsonResponse(data, safe=False)
 
 
 def game_session(request, session_id):
