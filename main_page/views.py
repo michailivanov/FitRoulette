@@ -4,9 +4,12 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 from .models import CardSet, Exercise, GameSession
 from .forms import AddExerciseForm, AddCardSetForm
+from .serializers import CardSetSerializer, ExerciseSerializer
 
 
 def title(request):
@@ -92,3 +95,16 @@ def add_cardset(request):
     else:
         form = AddCardSetForm()
         return render(request, 'add_cardset.html', {'form': form})
+
+@api_view(['GET','POST'])
+def CardsAndImagesView(request):
+    cards = CardSet.objects.all()
+    images = Exercise.objects.all()
+
+    cards_serializer = CardSetSerializer(cards, many=True)
+    images_serializer = ExerciseSerializer(images, many=True)
+
+    return Response({
+        "cards": cards_serializer.data,
+        "images": images_serializer.data
+    })
