@@ -108,3 +108,26 @@ def CardsAndImagesView(request):
         "cards": cards_serializer.data,
         "images": images_serializer.data
     })
+
+
+
+
+#Я не знаю как назвать второй эндпоинт, поэтому назову так
+@api_view(['GET'])
+def SecondEndpoint(request):
+
+    # Получаем FormData
+    name = request.data.getlist('FormData[0]')
+    name_serializer = ExerciseSerializer.get_names(name, many=True)
+
+    image = request.data.getlist('FormData[1]')
+    images_serializer = ExerciseSerializer.get_images(image, many=True)
+
+    # Для получения наборов
+    cards = request.data.get('card_sets')
+    cards_serializer = CardSetSerializer(cards, many=True)
+
+    return Response(
+                    {"name": name_serializer.data, "image": images_serializer.data},
+                    {"cards": cards_serializer.data},
+    )

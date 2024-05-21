@@ -8,6 +8,13 @@ class ExerciseSerializer(serializers.ModelSerializer):
         fields = ['name', 'image']
 
 
+
+    def get_names(self, obj):
+        return obj.name
+    def get_images(self, obj):
+        return obj.image.url
+
+
 class CardSetSerializer(serializers.ModelSerializer):
     exercises = serializers.StringRelatedField(many=True)
     class Meta:
