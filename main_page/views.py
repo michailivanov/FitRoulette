@@ -125,7 +125,7 @@ def SecondEndpoint(request):
     name_serializer = ExerciseSerializer.get_names(name, many=True)
 
     image = request.data.getlist('FormData[1]')
-    images_serializer = ExerciseSerializer.get_images(image, many=True)
+    images_serializer = ExerciseSerializer.get_image(image, many=True,  context={"request": request})
 
     # Для получения наборов
     cards = request.data.get('card_sets')

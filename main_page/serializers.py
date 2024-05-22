@@ -15,8 +15,9 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
     def get_names(self, obj):
         return obj.name
-    def get_images(self, obj):
-        return obj.image.url
+
+    #def get_images(self, obj):
+    #    return obj.image.url
 
 
 class CardSetSerializer(serializers.ModelSerializer):
