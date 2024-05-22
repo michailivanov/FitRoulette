@@ -1,4 +1,4 @@
-from random import shuffle
+from random import shuffle, choice
 
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 
 from .models import CardSet, Exercise, GameSession
 from .forms import AddExerciseForm, AddCardSetForm
-from .serializers import CardSetSerializer, ExerciseSerializer
+from .serializers import CardSetSerializer, ExerciseSerializer, GameSessionSerializer
 
 
 def title(request):
@@ -101,15 +101,19 @@ def CardsAndImagesView(request):
     cards = CardSet.objects.all()
     images = Exercise.objects.all()
 
+    pks = GameSession.objects.values_list('pk', flat=True)
+    random_pk = choice(pks)
+    game = GameSession.objects.get(pk=random_pk)
+
     cards_serializer = CardSetSerializer(cards, many=True)
-    images_serializer = ExerciseSerializer(images, many=True)
+    images_serializer = ExerciseSerializer(images, many=True, context={"request": request})
+    game_serializer = GameSessionSerializer(game, context={"request": request})
 
     return Response({
         "cards": cards_serializer.data,
-        "images": images_serializer.data
+        "images": images_serializer.data,
+        "game": game_serializer.data,
     })
-
-
 
 
 #Я не знаю как назвать второй эндпоинт, поэтому назову так

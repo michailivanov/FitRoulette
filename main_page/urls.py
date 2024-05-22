@@ -10,8 +10,6 @@ urlpatterns = [
     path('add_exercise', views.add_exercise, name='add_exercise'),
     path('add_cardset', views.add_cardset, name='add_cardset'),
     #path('card_sets_json', views.card_sets_json, name='card_sets_json')
-    #path('card_sets_json', views.CardSetViewSet.as_view(), name='card_sets_json'),
     path('card_sets_json', views.CardsAndImagesView, name='card_sets_json'),
-    #path('exercise_images', views.ExerciseViewSet.as_view()),
     path('second_endpoint_json', views.SecondEndpoint) # Я не знаю как назвать, так как будут отправлены два объекта
 ]
