@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #F2EACC; /* Фон для всех страниц */
+}
+
+.container {
+    text-align: center;
+}
+
+.btn {
+    max-width: 200px;
+    display: block; /* Блоковый элемент для размещения кнопок друг под другом */
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff6347; /* Цвет фона */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px; /* Скругленные углы */
+    box-shadow: 0 4px #d3543e; /* Тень для кнопки */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Плавные переходы */
+    margin: 10px 0; /* Отступы между кнопками */
+
+}
+
+.btn:hover {
+    background-color: #ff4c29; /* Цвет фона при наведении */
+    box-shadow: 0 4px #c0392b; /* Тень при наведении */
+}
+
+.btn:active {
+    background-color: #e74c3c; /* Цвет фона при нажатии */
+    box-shadow: 0 2px #c0392b; /* Тень при нажатии */
+    transform: translateY(2px); /* Эффект нажатия */
+}
+
+h1 {
+    font-family: 'Rubik', 'Asap';
+    font-size: 36px;
+    color: #9F4132;
+}
+
+p {
+    font-family: 'Rubik';
+    font-size: 20px;
+}

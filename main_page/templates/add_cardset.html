@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Добавить набор
 {% endblock %}
 {% block content %}
-<h2>Добавить новый набор</h2>
-<form method="post"  enctype="multipart/form-data" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Добавить</button>
-</form>
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+<div class="container">
+    <h1>Добавить новый набор</h1>
+    <form action="{% url 'add_cardset' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="submit-btn">Добавить</button>
+
+    </form>
+    <a href="{% url 'card_sets' %}" class="btn">Назад</a>
+</div>
 {% endblock %}
+
+
+
+
+

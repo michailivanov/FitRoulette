@@ -1,0 +1,163 @@
+.container {
+    text-align: center;
+    margin-top: 0px;
+}
+
+.wheel-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 0px;
+}
+
+.wheel-base img,
+.wheel-drum img,
+.pointer img {
+    display: block;
+    max-width: 100%;
+}
+
+.wheel-base {
+    position: relative;
+    margin-top: 170px;
+    width: 300px;  /* размер можно подогнать под нужный */
+    height: 300px;
+    z-index: 1;
+}
+
+.wheel-drum {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 20px;
+    left: 0;
+    z-index: 2;
+    transition: transform 4s ease-out;
+    transform-origin: 49% 32%;
+}
+
+.pointer {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 150px;
+    left: -5px;
+    z-index: 3;
+}
+
+#spin-wheel-btn {
+    background-color: #ff6347;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    position: absolute;
+    top: 340px;
+    left: 680px; /* Перемещаем кнопку влево */
+    z-index: 10;
+}
+
+
+#spin-wheel-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.exercise-box {
+    position: absolute;
+    top: 0px;
+    left: 600px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 10px solid #57C162;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
+    display: inline-block;
+    width: 290px; /* Подгоните размер по необходимости */
+    z-index: 100;
+}
+
+.exercise-image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin-top: 0px;
+}
+
+.hidden {
+    display: none;
+}
+
+.exercise-name {
+    font-family: 'Rubik', 'Asap';
+    font-size: 36px;
+    color: #9F4132;
+    font-weight: bold; /* Сделать текст жирным */
+    margin-top: 5px; /* Уменьшение верхнего отступа */
+    margin-bottom: 5px; /* Уменьшение нижнего отступа */
+}
+
+@media (max-width: 600px) {
+    .wheel-base {
+        position: relative;
+        margin-top: 160px;
+        width: 300px;  /* размер можно подогнать под нужный */
+        height: 300px;
+        z-index: 1;
+    }
+
+    .wheel-drum {
+        top: 10px;
+    }
+
+    .pointer {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 150px;
+        left: -5px;
+        z-index: 3;
+    }
+
+    #spin-wheel-btn {
+        background-color: #ff6347;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        position: absolute;
+        top: 340px;
+        left: 110px; /* Перемещаем кнопку влево */
+        z-index: 10;
+    }
+
+    .exercise-box {
+        position: absolute;
+        top: 0px;
+        left: 30px;
+        display: inline-block;
+        width: 290px; /* Подгоните размер по необходимости */
+        z-index: 100;
+    }
+
+    .exercise-name {
+        font-size: 18px;
+    }
+
+    .exercise-image {
+        width: 250px;
+        height: 250px;
+    }
+
+    .hidden {
+        display: none;
+    }
+}
+
+

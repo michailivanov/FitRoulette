@@ -1,17 +1,32 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Наборы карточек
 {% endblock %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/card_sets.css' %}">
+<div class="container">
     <h1>Наборы карточек</h1>
-    <form action="{% url 'card_sets' %}" method="post">
-        {% csrf_token %}
-        {% for set in sets %}
-            <p>{{ set }}
-            <button type="submit" name="set_id" value="{{ set.id }}">Выбрать</button></p>
-        {% endfor %}
-    </form>
+    {% for set in sets %}
+        <div class="card">
+            <p>{{ set.name }}</p>
+            <div class="icons">
+                <form action="{% url 'delete_cardset' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button class="delete-button" type="submit" name="set_id" value="{{ set.id }}"></button>
+                </form>
+
+                <form action="{% url 'card_sets' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button class="play-button" type="submit" name="set_id" value="{{ set.id }}"></button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+
     <a href="/add_exercise" class="btn">Добавить новое упражнение</a>
     <a href="/add_cardset" class="btn">Добавить новый набор</a>
+    <a href="/" class="btn">Назад</a>
+</div>
 {% endblock %}

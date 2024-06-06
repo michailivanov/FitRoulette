@@ -10,7 +10,7 @@ class Exercise(models.Model):
     """
     Класс "Упражнения
     """
-    name = models.CharField("Название упражнения", max_length=250)
+    name = models.CharField("Название упражнения", max_length=10)
     image = models.ImageField("Изображение", upload_to='img/')
 
     def __str__(self):
@@ -42,7 +42,7 @@ class GameSession(models.Model):
     current_exercise_index = models.IntegerField(default=0)
 
     def get_session_url(self):
-        return f"http://127.0.0.1:8000/game_session/{self.session_id}"
+        return f"http://127.0.0.1:8000/game_session/{self.session_id}/"
 
     def __str__(self):
         return str(self.session_id)

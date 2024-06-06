@@ -1,4 +1,3 @@
-import asyncio
 import json
 
 from channels.db import database_sync_to_async
@@ -78,17 +77,30 @@ class GameSessionConsumer(AsyncWebsocketConsumer):
                     'type': 'start_game',
                 }
             )
-        if action == 'spin_wheel':
+        elif action == 'spin_wheel':
             game_session = await self.get_game_session()
             exercises = game_session.shuffled_exercises
             current_index = (game_session.current_exercise_index + 1) % len(exercises)
             await self.update_game_session_index(current_index)  # Обновляем индекс в базе данных
 
+            # Получаем текущее упражнение
+            exercise = exercises[current_index]
+            exercise_data = await self.get_exercise_data(exercise['id'])
+
+            # Отправляем команду на вращение всем подключенным пользователям
             await self.channel_layer.group_send(
                 self.group_name,
                 {
-                    'type': 'exercise_selected',
-                    'name': exercises[current_index]['name']
+                    'type': 'spin_wheel_command',
+                    'degrees': data['degrees'],
+                    'exercise': exercise_data  # Отправляем данные упражнения
+                }
+            )
+
+            await self.channel_layer.group_send(
+                self.group_name,
+                {
+                    'type': 'hide_exercise',
                 }
             )
 
@@ -103,14 +115,26 @@ class GameSessionConsumer(AsyncWebsocketConsumer):
         session.save()
 
     @database_sync_to_async
-    def get_exercise_image(self):
-        Exercise.objects.get(id=self.id)
+    def get_exercise_data(self, exercise_id):
+        exercise = Exercise.objects.get(id=exercise_id)
+        return {
+            'name': exercise.name,
+            'image': exercise.image.url
+        }
 
     async def start_game(self, event):
         # Отправка сообщения о перенаправлении назад в WebSocket
         await self.send(text_data=json.dumps({
             'command': 'redirect',
             'url': f'/start_game/{self.session_id}/'
+        }))
+
+    async def spin_wheel_command(self, event):
+        # Отправка команды на вращение колеса клиентам через WebSocket
+        await self.send(text_data=json.dumps({
+            'command': 'spin_wheel',
+            'degrees': event['degrees'],
+            'exercise': event['exercise']
         }))
 
     async def exercise_selected(self, event):
@@ -121,4 +145,10 @@ class GameSessionConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'command': 'display_exercise',
             'name': exercise_name
+        }))
+
+    async def hide_exercise(self, event):
+        # Отправка команды скрыть форму упражнений клиентам через WebSocket
+        await self.send(text_data=json.dumps({
+            'command': 'hide_exercise'
         }))

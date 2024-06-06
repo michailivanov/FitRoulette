@@ -1,0 +1,43 @@
+.body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #F2EACC; /* Фон для всех страниц */
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    width: 170px;
+}
+
+.btn:hover {
+    background-color: #ff4c29; /* Цвет фона при наведении */
+    box-shadow: 0 4px #c0392b; /* Тень при наведении */
+}
+
+.btn:active {
+    background-color: #e74c3c; /* Цвет фона при нажатии */
+    box-shadow: 0 2px #c0392b; /* Тень при нажатии */
+    transform: translateY(2px); /* Эффект нажатия */
+}
+
+h1 {
+    font-family: 'Rubik', 'Asap';
+    font-size: 36px;
+    color: #9F4132;
+}
+
+p {
+    font-family: 'Rubik';
+    font-size: 20px;
+}
+
+
+

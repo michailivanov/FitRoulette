@@ -1,0 +1,48 @@
+.invite-text {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px; /* Отступ снизу от текста */
+}
+
+
+
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 13px;
+    width: 200px;
+    height: 50px;
+    background: #F2EACC;
+    border-width: 2px 2px 5px 2px;
+    border-style: solid;
+    border-color: #9F4132;
+    border-radius: 16px;
+}
+
+.session-url {
+    flex: 1; /* Занимает оставшееся пространство */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 10px; /* Отступ справа от текста */
+}
+
+.copy-icon {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.invite-section p {
+    font-size: 20px;
+    margin-right: 5px; /* Отступ справа от текста */
+}
+
+.btn {
+    width: 450px;
+    border-style: none;
+}
+
+

@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Добавить упражнение
 {% endblock %}
 {% block content %}
-<h2>Добавить новое упражнение</h2>
-<form method="post" enctype="multipart/form-data" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Добавить</button>
-</form>
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+<div class="container">
+    <h1>Добавить новое упражнение</h1>
+    <form method="post" enctype="multipart/form-data" action="">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name }}
+        </div>
+        <div class="form-group">
+            {{ form.image }}
+        </div>
+        <button type="submit" class="submit-btn">Добавить</button>
+    </form>
+    <a href="/card_sets" class="btn">Назад</a>
+</div>
 {% endblock %}

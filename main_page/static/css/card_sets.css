@@ -1,0 +1,87 @@
+.btn {
+    width: 170px;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Выравнивание содержимого по обеим сторонам */
+    padding: 0px 13px;
+    width: 200px;
+    height: 40px;
+    background: #F2EACC;
+    border-width: 2px 2px 2px 2px;
+    border-style: solid;
+    border-color: #9F4132;
+    border-radius: 16px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 0; /* Убираем отступы у параграфа */
+}
+
+.card .icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px; /* Расстояние между иконками */
+}
+
+.card .icons form {
+    margin: 0; /* Убираем отступы у формы */
+}
+
+.card .icons img {
+    width: 24px; /* Ширина иконок */
+    height: 24px; /* Высота иконок */
+    cursor: pointer; /* Курсор при наведении */
+
+}
+
+.play-button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: #F2EACC;
+    width: 32px;
+    height: 32px;
+    background-image: url('../images/play.png')
+}
+
+.delete-button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: #F2EACC;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/trash-01.png')
+}
+
+.settings-button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: #F2EACC;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/settings-02.png')
+}
+
+
+

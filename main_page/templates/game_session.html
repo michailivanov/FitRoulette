@@ -1,19 +1,30 @@
 {% extends 'base.html' %}
-
-{% block title %}Игра скоро начнется!{% endblock %}
+{% load static %}
 
 {% block content %}
-    <h1>Ссылка на вашу игру: {{ game.get_session_url }}</h1>
-    <p>Выбранный набор: {{ game.card_set }}</p>
-    <div id="user-count">Количество игроков: 0</div>
-    <button id="start-game-btn">Начать игру</button>
+<link rel="stylesheet" href="{% static 'css/game_session.css' %}">
+<div class="container">
+    <p class="invite-text">Пригласить участников:</p>
+    <div class="card">
+        <span class="session-url">{{ game.get_session_url }}</span>
+        <img src="{% static 'images/icon.png' %}" alt="Copy" class="copy-icon" onclick="copyToClipboard('{{ game.get_session_url }}')">
+    </div>
+    <p class="invite-text">Выбранный набор: {{ game.card_set }}</p>
+    <div id="user-count" class="invite-text">Количество игроков: 0</div>
+    <button class="btn" id="start-game-btn">Начать игру</button>
+    <a href="/" class="btn">Назад</a>
+</div>
 
 
     <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text)
+        }
+
         console.log({{ game.shuffled_exercises|safe }})
         document.addEventListener('DOMContentLoaded', function () {
             const sessionId = "{{ game.session_id }}";
-            const wsStart = 'ws://';
+            const wsStart = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
             const endpoint = wsStart + window.location.host + '/ws/game_session/' + sessionId + '/';
             const socket = new WebSocket(endpoint);
 

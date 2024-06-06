@@ -1,0 +1,159 @@
+h1 {
+    font-family: 'Rubik', 'Asap';
+    font-size: 36px;
+    color: #9F4132;
+}
+
+.form-group {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.label {
+    font-family: 'Rubik', 'Asap';
+    font-size: 20px;
+    color: #9F4132;
+}
+
+.form-input, .form-file-input {
+    display: block;
+    width: 60%;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #9F4132;
+    border-radius: 8px;
+    background-color: #F2EACC;
+}
+
+.form-input:focus, .form-file-input:focus {
+    border-color: #FF6347;
+    outline: none;
+}
+
+.submit-btn {
+    max-width: 200px;
+    display: block; /* Блоковый элемент для размещения кнопок друг под другом */
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff6347; /* Цвет фона */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px; /* Скругленные углы */
+    box-shadow: 0 4px #d3543e; /* Тень для кнопки */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Плавные переходы */
+    margin: 10px 0; /* Отступы между кнопками */
+    margin-left: auto;
+    margin-right: auto;
+    border-style: none;
+}
+
+.submit-btn:hover {
+    background-color: #E5533D;
+}
+
+.btn {
+    max-width: 200px;
+    display: block; /* Блоковый элемент для размещения кнопок друг под другом */
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #ff6347; /* Цвет фона */
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px; /* Скругленные углы */
+    box-shadow: 0 4px #d3543e; /* Тень для кнопки */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Плавные переходы */
+    margin: 10px 0; /* Отступы между кнопками */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #9F4132;
+}
+
+.form-input {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #9F4132;
+    border-radius: 8px;
+    background-color: #F2EACC;
+}
+
+.form-input:focus, .form-checkbox:focus {
+    border-color: #FF6347;
+    outline: none;
+}
+
+.exercise-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Выравнивание содержимого по обеим сторонам */
+    padding: 0px 13px;
+    width: 200px;
+    height: 40px;
+    background: #F2EACC;
+    border-width: 2px 2px 2px 2px;
+    border-style: solid;
+    border-color: #9F4132;
+    border-radius: 16px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 0; /* Убираем отступы у параграфа */
+}
+
+.card .icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px; /* Расстояние между иконками */
+}
+
+.card .icons form {
+    margin: 0; /* Убираем отступы у формы */
+}
+
+.card .icons img {
+    width: 24px; /* Ширина иконок */
+    height: 24px; /* Высота иконок */
+    cursor: pointer; /* Курсор при наведении */
+
+}
+
+.delete-button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: #F2EACC;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/trash-01.png')
+}

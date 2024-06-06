@@ -1,43 +1,93 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Fit&Play{% endblock %}
 
 {% block content %}
-<p>Выбранный набор: {{ game.card_set }}</p>
-<button id="spin-wheel-btn">Вращать колесо</button>
-<div id="selected-exercise"></div>
+<link rel="stylesheet" href="{% static 'css/wheel.css' %}">
+<div class="container">
+    <div class="wheel-container">
+        <div class="wheel-base">
+            <img src="{% static 'images/wheel-base.png' %}" alt="Wheel Base">
+        </div>
+        <div class="wheel-drum" id="wheel">
+            <img src="{% static 'images/wheel-drum.png' %}" alt="Wheel Drum">
+        </div>
+        <div class="pointer">
+            <img src="{% static 'images/vector.png' %}" alt="Pointer">
+        </div>
+    </div>
+    <button id="spin-wheel-btn">Крутить колесо!</button>
+    <div id="exercise-box" class="exercise-box hidden">
+        <p id="exercise-name" class="exercise-name"></p>
+        <img id="exercise-image" class="exercise-image" src="" alt="">
+    </div>
+</div>
+
+<ul id="exercise-list" style="display:none;">
+    {% for exercise in exercises %}
+        <li data-name="{{ exercise.name }}" data-image="{{ exercise.image.url }}">
+            {{ exercise.name }}
+        </li>
+    {% endfor %}
+</ul>
 
 <script>
-    console.log({{ game.shuffled_exercises|safe }})
-    document.addEventListener('DOMContentLoaded', function () {
-        const wsStart = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-        const endpoint = wsStart + window.location.host + '/ws/game_session/{{ game.session_id }}/';
-        const socket = new WebSocket(endpoint);
+document.addEventListener('DOMContentLoaded', function () {
+    const wsStart = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+    const endpoint = `${wsStart}${window.location.host}/ws/game_session/{{ game.session_id }}/`;
+    const socket = new WebSocket(endpoint);
 
-        document.getElementById('spin-wheel-btn').addEventListener('click', function() {
-            socket.send(JSON.stringify({ action: 'spin_wheel' }));
-        });
+    const spinWheelBtn = document.getElementById('spin-wheel-btn');
+    const exerciseBox = document.getElementById('exercise-box');
+    const exerciseName = document.getElementById('exercise-name');
+    const exerciseImage = document.getElementById('exercise-image');
+    const wheel = document.getElementById('wheel');
 
-        socket.onmessage = function(e) {
-            const data = JSON.parse(e.data);
-            if (data.command === 'display_exercise') {
-                setTimeout(() => {
-                    document.getElementById('selected-exercise').innerText = `${data['name']}`;
-                }, 3000);  // Задержка 3 секунды перед отображением
-            }
-        };
+    let spinning = false;
 
-        socket.onopen = function() {
-            console.log("WebSocket connection opened");
-        };
+    socket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        if (data.command === 'spin_wheel') {
+            const degrees = data.degrees;
+            wheel.style.transform = `rotate(${degrees}deg)`;
+            setTimeout(() => {
+                spinning = false;
+                spinWheelBtn.disabled = false;
+                exerciseBox.classList.remove('hidden');
 
-        socket.onerror = function(e) {
-            console.error("WebSocket error observed:", e);
-        };
+                // Отображаем упражнение после вращения
+                const exercise = data.exercise;
+                exerciseName.innerText = exercise.name;
+                exerciseImage.src = exercise.image;
+                exerciseImage.alt = exercise.name;
+            }, 4500); // Убедитесь, что это совпадает с длительностью анимации
+        } else if (data.command === 'hide_exercise') {
+            exerciseBox.classList.add('hidden');
+        }
+    };
 
-        socket.onclose = function() {
-            console.log("WebSocket connection closed");
-        };
+    socket.onopen = function() {
+        console.log("WebSocket connection opened");
+    };
+
+    socket.onerror = function(e) {
+        console.error("WebSocket error observed:", e);
+    };
+
+    socket.onclose = function() {
+        console.log("WebSocket connection closed");
+    };
+
+    spinWheelBtn.addEventListener('click', function() {
+        if (!spinning) {
+            spinning = true;
+            spinWheelBtn.disabled = true;
+            exerciseBox.classList.add('hidden');
+            const randomDegrees = Math.floor(2000 + Math.random() * 2000);  // Случайное количество градусов для вращения
+            socket.send(JSON.stringify({ action: 'spin_wheel', degrees: randomDegrees }));
+        }
     });
+});
 </script>
 {% endblock %}
